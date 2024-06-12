@@ -72,7 +72,6 @@ else:
 
     logger.info(f"FAB_ROOT set to {fabulousRoot}")
 
-# Testing git workflow
 # Checks for existing project directory
 # Creates directory by copying project template and synthesis files (verliog or vhdl)
 # Calls function to adjust directory paths
