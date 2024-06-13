@@ -72,9 +72,8 @@ else:
 
     logger.info(f"FAB_ROOT set to {fabulousRoot}")
 
-# Checks for existing project directory
-# Creates directory by copying project template and synthesis files (verliog or vhdl)
-# Calls function to adjust directory paths
+
+# Create a FABulous Verilog project that contains all the required files
 def create_project(project_dir, type: Literal["verilog", "vhdl"] = "verilog"):
     if os.path.exists(project_dir):
         print("Project directory already exists!")
@@ -140,7 +139,7 @@ def adjust_directory_in_verilog_tb(project_dir):
             for line in fin:
                 fout.write(line.replace("PROJECT_DIR", f"{project_dir}"))
 
-# Determines OS and abstracts the creation of paths for cross-platform compatibility
+
 def get_path(path):
     system = platform.system()
     # Darwin corresponds to MacOS, which also uses POSIX-style paths
@@ -226,7 +225,6 @@ To run the complete FABulous flow with the default project, run the following co
     def preloop(self) -> None:
 
         # File does not exist when the shell is started the first time after creating a new project
-        # Checks existence of a history file and reads its contents for persisting command-line history.
         if os.path.exists(histfile):
             readline.read_history_file(histfile)
 
@@ -254,8 +252,7 @@ To run the complete FABulous flow with the default project, run the following co
                         name, wrap_with_except_handling(getattr(self, fun))
                     )
 
-        # os.chdir(args.project_dir) 
-        # ^^^ (can change current working directory, for debug???)
+        # os.chdir(args.project_dir)
         tcl.eval(script)
 
         if "exit" in script:
@@ -284,7 +281,7 @@ To run the complete FABulous flow with the default project, run the following co
             print(traceback.format_exc())
             return False
 
-    # override the default emptyline method, so empty command will just do nothing and prevent repeat of last command.
+    # override the emptyline method, so empty command will just do nothing
     def emptyline(self):
         pass
 
