@@ -16,6 +16,7 @@ logging.basicConfig(
     format="[%(levelname)s]-%(asctime)s - %(message)s", level=logging.INFO
 )
 
+
 class FABulous:
     """Class for managing fabric and geometry generation.
 
@@ -34,6 +35,7 @@ class FABulous:
     fileExtension : str
         Default file extension for generated output files ('.v' or '.vhdl').
     """
+
     fabricGenerator: FabricGenerator
     geometryGenerator: GeometryGenerator
     fabric: Fabric
@@ -41,10 +43,10 @@ class FABulous:
 
     def __init__(self, writer: codeGen.codeGenerator, fabricCSV: str = ""):
         """Initialises FABulous object.
-        
+
         If 'fabricCSV' is provided, parses fabric data and initialises
-        'fabricGenerator' and 'geometryGenerator' with parsed data. 
-        
+        'fabricGenerator' and 'geometryGenerator' with parsed data.
+
         If using VHDL changes extension to '.vhdl' from '.v'.
 
         Parameters

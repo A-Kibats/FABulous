@@ -141,6 +141,7 @@ def adjust_directory_in_verilog_tb(project_dir):
             for line in fin:
                 fout.write(line.replace("PROJECT_DIR", f"{project_dir}"))
 
+
 # Determines OS and abstracts the creation of paths for cross-platform compatibility
 def get_path(path):
     system = platform.system()
@@ -255,7 +256,7 @@ To run the complete FABulous flow with the default project, run the following co
                         name, wrap_with_except_handling(getattr(self, fun))
                     )
 
-        # os.chdir(args.project_dir) 
+        # os.chdir(args.project_dir)
         # ^^^ (can change current working directory, for debug???)
         tcl.eval(script)
 
