@@ -1,5 +1,6 @@
 import logging
 
+# Importing Modules from FABulous Framework.
 import FABulous.fabric_generator.code_generator as codeGen
 import FABulous.fabric_generator.file_parser as fileParser
 import FABulous.fabric_cad.model_generation_npnr as model_gen_npnr
@@ -9,17 +10,17 @@ from FABulous.fabric_definition.Fabric import Fabric, Tile
 from FABulous.fabric_generator.fabric_gen import FabricGenerator
 from FABulous.geometry_generator.geometry_gen import GeometryGenerator
 
+# Setting up logging configuration.
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     format="[%(levelname)s]-%(asctime)s - %(message)s", level=logging.INFO
 )
 
-
 class FABulous:
     """Class for managing fabric and geometry generation.
 
     This class parses fabric data from 'fabric.csv', generates fabric layouts,
-    geometries, models for both place and root tools (Npnr and VPR), as well as
+    geometries, models for both place and root tools (Npnr/VPR), as well as
     other fabric-related functions.
 
     Attributes
@@ -31,7 +32,7 @@ class FABulous:
     fabric : Fabric
         Represents the parsed fabric data.
     fileExtension : str
-        Default file extension for generated output files (".v" or ".vhdl").
+        Default file extension for generated output files ('.v' or '.vhdl').
     """
     fabricGenerator: FabricGenerator
     geometryGenerator: GeometryGenerator
@@ -41,10 +42,10 @@ class FABulous:
     def __init__(self, writer: codeGen.codeGenerator, fabricCSV: str = ""):
         """Initialises FABulous object.
         
-        If 'fabricCSV' is provides, parses fabric data and initialises
+        If 'fabricCSV' is provided, parses fabric data and initialises
         'fabricGenerator' and 'geometryGenerator' with parsed data. 
         
-        If using VHDL changes extension to ".vhdl" from ".v".
+        If using VHDL changes extension to '.vhdl' from '.v'.
 
         Parameters
         ----------
@@ -75,7 +76,7 @@ class FABulous:
         self.writer.outFileName = outputDir
 
     def loadFabric(self, dir: str):
-        """Loads fabric data from "fabric.csv".
+        """Loads fabric data from 'fabric.csv'.
 
         Parameters
         ----------
@@ -95,8 +96,8 @@ class FABulous:
             logger.warning("Only .csv files are supported for fabric loading")
 
     def bootstrapSwitchMatrix(self, tileName: str, outputDir: str):
-        """Bootstrap the switch matrix for specified tile via 'bootstrapSwitchMatrix'
-        defined in "fabric_gen.py".
+        """Bootstraps the switch matrix for specified tile via 'bootstrapSwitchMatrix'
+        defined in 'fabric_gen.py'.
 
         Parameters
         ----------
@@ -110,7 +111,7 @@ class FABulous:
 
     def addList2Matrix(self, list: str, matrix: str):
         """Converts list into CSV matrix via 'list2CSV' definied in
-        "fabric_gen.py" and saves it.
+        'fabric_gen.py' and saves it.
 
         Parameters
         ----------
@@ -136,7 +137,7 @@ class FABulous:
 
     def genSwitchMatrix(self, tileName: str):
         """Generates switch matrix for specified tile via 'genTileSwitchMatrix'
-        defined in "fabric_gen.py".
+        defined in 'fabric_gen.py'.
 
         Parameters
         ----------
@@ -148,7 +149,7 @@ class FABulous:
 
     def genTile(self, tileName: str):
         """Generates a tile based on its name via 'generateTile'
-        defined in "fabric_gen.py".
+        defined in 'fabric_gen.py'.
 
         Parameters
         ----------
@@ -160,7 +161,7 @@ class FABulous:
 
     def genSuperTile(self, tileName: str):
         """Generates a super tile based on its name via 'generateSuperTile'
-        defined in "fabric_gen.py".
+        defined in 'fabric_gen.py'.
 
         Parameters
         ----------
@@ -172,7 +173,7 @@ class FABulous:
 
     def genFabric(self):
         """Generates the entire fabric layout via 'generatreFabric' defined
-        in "fabric_gen.py".
+        in 'fabric_gen.py'.
         """
         self.fabricGenerator.generateFabric()
 
@@ -189,7 +190,7 @@ class FABulous:
 
     def genTopWrapper(self):
         """Generates the top wrapper for the fabric via 'generateTopWrapper'
-        defined in "fabric_gen.py".
+        defined in 'fabric_gen.py'.
         """
         self.fabricGenerator.generateTopWrapper()
 
