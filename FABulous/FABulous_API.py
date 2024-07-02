@@ -1,4 +1,5 @@
-import logging
+from loguru import logger
+
 
 # Importing Modules from FABulous Framework.
 import FABulous.fabric_generator.code_generator as codeGen
@@ -10,14 +11,26 @@ from FABulous.fabric_definition.Fabric import Fabric, Tile
 from FABulous.fabric_generator.fabric_gen import FabricGenerator
 from FABulous.geometry_generator.geometry_gen import GeometryGenerator
 
-# Setting up logging configuration.
-logger = logging.getLogger(__name__)
-logging.basicConfig(
-    format="[%(levelname)s]-%(asctime)s - %(message)s", level=logging.INFO
-)
-
 
 class FABulous:
+    """Class for managing fabric and geometry generation.
+
+    This class parses fabric data from 'fabric.csv', generates fabric layouts,
+    geometries, models for both place and root tools (Npnr/VPR), as well as
+    other fabric-related functions.
+
+    Attributes
+    ----------
+    fabricGenerator : FabricGenerator
+        Object responsible for generating fabric-related outputs.
+    geometryGenerator : GeometryGenerator
+        Object responsible for generating geometry-related outputs.
+    fabric : Fabric
+        Represents the parsed fabric data.
+    fileExtension : str
+        Default file extension for generated output files ('.v' or '.vhdl').
+    """
+
     """Class for managing fabric and geometry generation.
 
     This class parses fabric data from 'fabric.csv', generates fabric layouts,
@@ -95,7 +108,8 @@ class FABulous:
             self.fabricGenerator = FabricGenerator(self.fabric, self.writer)
             self.geometryGenerator = GeometryGenerator(self.fabric)
         else:
-            logger.warning("Only .csv files are supported for fabric loading")
+            logger.error("Only .csv files are supported for fabric loading")
+            raise ValueError
 
     def bootstrapSwitchMatrix(self, tileName: str, outputDir: str):
         """Bootstraps the switch matrix for specified tile via 'bootstrapSwitchMatrix'
